@@ -49,6 +49,14 @@ def check_max_resolution_rescale(image, max_width, max_height):
         image = image.resize(
             (new_width, new_height), PIL.Image.LANCZOS
         )  # Image.LANCZOS bu metod küçültmede oluşan alizing problerini gidermek için
+    new_width, new_height = image.size
+    if new_width%8!=0 or new_height%8!=0:
+            new_width=new_width-new_width%8
+            new_height=new_height-new_height%8
+            image = image.resize(
+            (new_width, new_height), PIL.Image.LANCZOS
+        )  # Image.LANCZOS bu metod küçültmede oluşan alizing problerini gidermek için
+
     return image
 
 

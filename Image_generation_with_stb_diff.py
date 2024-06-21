@@ -99,7 +99,12 @@ def generate_image(image_path, prompt, neg_prompt, w, h, steps, upscale, save_fo
     
         
     # Save the PIL images for reference
-
+    '''
+    image_pil.save("image_pil.png")
+    mask_re.save("seg_image.png")
+    depth_image.save("depth_image.png")
+    cany_image.save("cany_image.png")
+    '''
 
     print("Model loading...")
     # Initialize the random generator and load ControlNet models for inpainting
@@ -180,10 +185,6 @@ def generate_image(image_path, prompt, neg_prompt, w, h, steps, upscale, save_fo
 
     else:
         # Generate the image without upscaling
-        image_pil.save("image_pil.png")
-        mask_re.save("seg_image.png")
-        depth_image.save("depth_image.png")
-        cany_image.save("cany_image.png")
 
         pred_image = pipe(
             prompt,
