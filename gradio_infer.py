@@ -1,5 +1,4 @@
 import gradio as gr
-from Image_generation_with_stb_diff import generate_image
 from image_utils import *
 import torch
 import cv2
