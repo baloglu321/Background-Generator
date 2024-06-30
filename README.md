@@ -1,4 +1,4 @@
-# Stable_diff_with_gradio
+# Background-Generator
 
 In this project, the background of the uploaded image is removed with Rembg. The background is reconstructed using Stable diffision models. The reconstructed image is sent to the interface via Gradio.
 
