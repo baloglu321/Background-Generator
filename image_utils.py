@@ -47,6 +47,12 @@ def generate_dept(init_image):
     return image
 
 
+def conv_pill(image):
+    img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    im_pil = PIL.Image.fromarray(img)
+    return im_pil
+
+
 def check_max_resolution_rescale(image, max_width, max_height):
     width, height = image.size
     if width > max_width or height > max_height:
@@ -63,8 +69,9 @@ def check_max_resolution_rescale(image, max_width, max_height):
         image = image.resize(
             (new_width, new_height), PIL.Image.LANCZOS
         )  # Image.LANCZOS bu metod küçültmede oluşan alizing problerini gidermek için
-
-    return image
+    image = np.array(image)
+    image_cv2 = image[:, :, ::-1].copy()
+    return image_cv2
 
 
 def open_image(image, mask, w, h):

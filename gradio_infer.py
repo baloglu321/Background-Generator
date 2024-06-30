@@ -42,23 +42,18 @@ pipe = pipe.to("cuda")
 
 def generate(image, prompt, neg_prompt, pipe=pipe):
     raw_image = image
-    raw_image_pil = check_max_resolution_rescale(raw_image, 1024, 1024)
-    raw_image_pil.save("raw_image_pil.png")
-    image_path = "raw_image_pil.png"
-    img = cv2.imread(image_path)
-
+    raw_image_cv2 = check_max_resolution_rescale(raw_image, 1024, 1024)
+    img = raw_image_cv2
     h, w, _ = img.shape
     steps = 42
     seed = random.randint(0, 4200000)
-
-    image_cv = cv2.imread(image_path)
-    image_cv = cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB)
-    image_load = load_image(image_path)
+    image_cv = img.copy()
+    # image_cv = cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB)
+    image_load = conv_pill(img)
     rem_image, mask = generate_mask(image_cv)
     mask_3ch = PIL.Image.fromarray(cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB))
-
-    image_pil = PIL.Image.fromarray(image_cv)
-    mask_re = PIL.Image.fromarray(mask)
+    image_pil = conv_pill(image_cv)
+    mask_re = conv_pill(mask)
     depth_image = generate_dept(image_load)
 
     neg_prompt = (
@@ -84,7 +79,6 @@ def generate(image, prompt, neg_prompt, pipe=pipe):
     print(f"Done! The image is generated {w}x{h} size ")
 
     pred_image = PIL.Image.fromarray((pred_image * 255).astype(np.uint8))
-    pred_image.save("pil_pred_image.png")
     mask_re = mask_3ch.convert("RGB")
     res_image = add_fg(pred_image, image_pil, mask_re)
     return res_image
