@@ -3,7 +3,6 @@ from image_utils import *
 import torch
 import cv2
 import numpy as np
-import os
 import PIL
 from diffusers import (
     StableDiffusionControlNetInpaintPipeline,
@@ -51,11 +50,13 @@ def generate(image, prompt, neg_prompt, pipe=pipe):
     # image_cv = cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB)
     image_load = conv_pill(img)
     rem_image, mask = generate_mask(image_cv)
+    torch.cuda.empty_cache()
     mask_3ch = PIL.Image.fromarray(cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB))
     image_pil = conv_pill(image_cv)
     mask_re = conv_pill(mask)
     depth_image = generate_dept(image_load)
-
+    torch.cuda.empty_cache()
+    
     neg_prompt = (
         neg_prompt
         + "deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck"
@@ -81,6 +82,7 @@ def generate(image, prompt, neg_prompt, pipe=pipe):
     pred_image = PIL.Image.fromarray((pred_image * 255).astype(np.uint8))
     mask_re = mask_3ch.convert("RGB")
     res_image = add_fg(pred_image, image_pil, mask_re)
+    torch.cuda.empty_cache()
     return res_image
 
 
