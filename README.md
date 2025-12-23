@@ -7,19 +7,6 @@ An intelligent image processing pipeline that combines background removal, depth
 [![CUDA](https://img.shields.io/badge/CUDA-Required-green.svg)](https://developer.nvidia.com/cuda-toolkit)
 [![Gradio](https://img.shields.io/badge/Gradio-UI-orange.svg)](https://gradio.app/)
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technical Details](#technical-details)
-- [Examples](#examples)
-- [Hardware Requirements](#hardware-requirements)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## 🎯 Overview
 
@@ -69,12 +56,12 @@ graph TB
     D --> M
     M --> N[Final Output]
     
-    style A fill:#e1f5ff
-    style N fill:#d4edda
-    style G fill:#fff3cd
-    style J fill:#f8d7da
-    style C fill:#d1ecf1
-    style F fill:#d1ecf1
+    style A fill:#e1f5ff,stroke:#333,stroke-width:3px,color:#000
+    style N fill:#d4edda,stroke:#333,stroke-width:3px,color:#000
+    style G fill:#fff3cd,stroke:#333,stroke-width:3px,color:#000
+    style J fill:#f8d7da,stroke:#333,stroke-width:3px,color:#000
+    style C fill:#d1ecf1,stroke:#333,stroke-width:3px,color:#000
+    style F fill:#d1ecf1,stroke:#333,stroke-width:3px,color:#000
 ```
 
 ### Pipeline Stages
@@ -243,7 +230,7 @@ Background-Generator/
 **Prompt:** "A car on a mountain road, Landscape"  
 **Result:** Car placed on a scenic mountain highway with dramatic landscape
 
-![Example 1](images/example1.png)
+![Example 1](images/example_1.png)
 
 ### Example 2: Beach Sunset Scene
 
@@ -251,13 +238,13 @@ Background-Generator/
 **Prompt:** "A car parked on a road by the beach, Beautiful landscape, Sunset, Beautiful sunny weather, Cloudy sky"  
 **Result:** Vehicle on coastal road with golden sunset and ocean view
 
-![Example 2](images/example2.png)
+![Example 2](images/example_2.png)
 
 ## 💾 Hardware Requirements
 
 ### Minimum Requirements
 
-- **GPU**: NVIDIA GPU with 8GB VRAM (RTX 3060 or better)
+- **GPU**: NVIDIA GPU with 6GB VRAM (RTX 2060 or better)
 - **RAM**: 16GB system memory
 - **Storage**: 20GB free space (for models and processing)
 - **OS**: Windows 10/11, Linux (Ubuntu 20.04+), or macOS with CUDA support
@@ -319,25 +306,6 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 ```
 
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Areas for Improvement
-
-- Batch processing support
-- Additional ControlNet options (canny, pose, etc.)
-- Model selection UI
-- Image resolution presets
-- Processing history and favorites
-- Advanced parameter controls
-- Multi-language support
 
 ## 📄 License
 
